@@ -2,11 +2,13 @@ import React from 'react'
 import { createRoot } from 'react-dom/client'
 import './style.css'
 
+const API_BASE = (import.meta.env.VITE_API_URL || 'http://localhost:8080').replace(/\/$/, '')
+
 function App() {
   const [apiStatus, setApiStatus] = React.useState('Checking…')
 
   React.useEffect(() => {
-    fetch('/api/health')
+    fetch(`${API_BASE}/api/health`)
       .then((response) => {
         if (!response.ok) throw new Error('API unavailable')
         return response.json()
